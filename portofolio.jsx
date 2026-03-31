@@ -10,10 +10,8 @@ import {
   GraduationCap, 
   ExternalLink, 
   ChevronRight,
-  Code,
   Users,
   Database,
-  FileText,
   Globe,
   Instagram,
   Library,
@@ -22,9 +20,7 @@ import {
   Download,
   Layers,
   Star,
-  CheckCircle,
-  Linkedin,
-  ShieldCheck
+  CheckCircle
 } from 'lucide-react';
 
 const App = () => {
@@ -205,11 +201,14 @@ const App = () => {
           <div className="w-full max-w-md lg:max-w-lg">
             <div className="relative group">
               <div className="absolute -inset-4 bg-blue-600/5 rounded-[3rem] blur-2xl group-hover:bg-blue-600/10 transition-all"></div>
-              <div className="relative rounded-[2.5rem] overflow-hidden border-8 border-white shadow-2xl aspect-[4/5]">
+              <div className="relative rounded-[2.5rem] overflow-hidden border-8 border-white shadow-2xl aspect-[4/5] bg-slate-100">
                 <img 
-                  src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800" 
+                  src="WhatsApp Image 2026-01-15 at 20.36.52.jpg" 
                   alt="Egi Dio Bagus Sudewo"
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+                  onError={(e) => {
+                    e.target.src = "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800";
+                  }}
                 />
               </div>
             </div>
@@ -217,28 +216,29 @@ const App = () => {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* About & Education */}
       <section id="about" className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
-          <SectionHeader title="About Research Focus" subtitle="Combining academic rigor with technical innovation to bridge the gap between theory and application." />
-          <div className="grid lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 space-y-6">
-              <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 leading-relaxed text-lg text-slate-600">
-                {profileData.summary}
+          <SectionHeader title="Academic Foundation" subtitle="A journey of continuous learning and rigorous academic pursuit." />
+          <div className="grid lg:grid-cols-3 gap-12">
+            <div className="lg:col-span-2 space-y-8">
+              <div className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100">
+                 <p className="text-xl text-slate-600 leading-relaxed font-medium italic">"{profileData.summary}"</p>
               </div>
               <div className="grid md:grid-cols-2 gap-6">
                 {profileData.education.map((edu, i) => (
-                  <div key={i} className="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:border-blue-200 transition-all">
-                    <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
+                  <div key={i} className="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:border-blue-400 transition-all group">
+                    <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-all">
                       <GraduationCap size={24} />
                     </div>
                     <span className="text-xs font-black text-blue-600 uppercase tracking-widest">{edu.year}</span>
                     <h4 className="text-xl font-bold text-slate-900 mt-2">{edu.degree}</h4>
                     <p className="text-slate-500 font-medium">{edu.school}</p>
                     <div className="mt-4 flex items-center gap-2">
-                       <span className="px-3 py-1 bg-emerald-50 text-emerald-700 text-[10px] font-bold rounded-full">GPA {edu.gpa}</span>
-                       <span className="px-3 py-1 bg-blue-50 text-blue-700 text-[10px] font-bold rounded-full uppercase">{edu.honors}</span>
+                       <span className="px-3 py-1 bg-emerald-50 text-emerald-700 text-[10px] font-bold rounded-full border border-emerald-100">GPA {edu.gpa}</span>
+                       <span className="px-3 py-1 bg-blue-50 text-blue-700 text-[10px] font-bold rounded-full uppercase border border-blue-100">{edu.honors}</span>
                     </div>
+                    <p className="mt-4 text-slate-500 text-sm leading-relaxed">{edu.details}</p>
                   </div>
                 ))}
               </div>
@@ -246,18 +246,18 @@ const App = () => {
             <div className="space-y-6">
                <div className="p-8 bg-slate-900 rounded-[2.5rem] text-white shadow-xl h-full flex flex-col justify-between">
                   <div>
-                    <h4 className="text-xl font-bold mb-4 text-white">Areas of Interest</h4>
+                    <h4 className="text-xl font-bold mb-6 flex items-center gap-2"><CheckCircle className="text-blue-500"/> Research Focus</h4>
                     <ul className="space-y-4">
-                      {['Computer Vision', 'Predictive Modeling', 'Pattern Recognition', 'Neural Networks'].map(item => (
-                        <li key={item} className="flex items-center gap-3 text-slate-400 font-medium">
-                          <CheckCircle size={16} className="text-blue-500" /> {item}
+                      {['Computer Vision', 'Deep Learning', 'Pattern Recognition', 'Neural Networks', 'Predictive Analytics'].map(item => (
+                        <li key={item} className="flex items-center gap-3 text-slate-300 font-medium">
+                          <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div> {item}
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div className="mt-12 pt-8 border-t border-slate-800">
-                    <p className="text-xs text-slate-500 uppercase tracking-widest mb-2 font-bold">Research Impact</p>
-                    <p className="text-slate-300 italic text-sm leading-relaxed">"Contributing to the digitalization of indigenous knowledge through deep learning character recognition."</p>
+                    <p className="text-xs text-slate-500 uppercase tracking-widest mb-3 font-bold">Academic Philosophy</p>
+                    <p className="text-slate-400 italic text-sm leading-relaxed">"Integrating indigenous knowledge with modern AI to preserve cultural heritage through technology."</p>
                   </div>
                </div>
             </div>
@@ -268,24 +268,24 @@ const App = () => {
       {/* Teaching Section */}
       <section id="teaching" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <SectionHeader title="Teaching Portfolio" subtitle="Experienced in delivering high-level informatics and management courses." />
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <SectionHeader title="Teaching Portfolio" subtitle="Dedicated to nurturing the next generation of informatics professionals." />
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {profileData.teaching.map((course, i) => (
-              <div key={i} className="p-6 bg-slate-50 rounded-3xl border border-slate-100 text-center hover:bg-white hover:border-blue-600 hover:shadow-lg transition-all group">
-                <div className="w-12 h-12 bg-white rounded-2xl mx-auto mb-4 flex items-center justify-center text-slate-400 group-hover:text-blue-600 transition-all shadow-sm">
-                  <BookMarked size={20} />
+              <div key={i} className="p-8 bg-slate-50 rounded-3xl border border-slate-100 text-center hover:bg-white hover:border-blue-600 hover:shadow-2xl hover:shadow-blue-100 transition-all group">
+                <div className="w-14 h-14 bg-white rounded-2xl mx-auto mb-6 flex items-center justify-center text-slate-400 group-hover:text-blue-600 transition-all shadow-sm">
+                  <BookMarked size={24} />
                 </div>
-                <p className="font-bold text-slate-800 text-sm">{course}</p>
+                <p className="font-bold text-slate-800 tracking-tight">{course}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Research & Publications Section */}
+      {/* Research Section */}
       <section id="research" className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
-          <SectionHeader title="Academic Publications" subtitle="Published research in indexed journals and conferences focusing on AI optimization." />
+          <SectionHeader title="Research & Publications" subtitle="Contributing to international journals and nationally indexed publications." />
           
           <div className="grid gap-6">
             {profileData.publications.map((pub, i) => (
@@ -294,24 +294,28 @@ const App = () => {
                 href={pub.link} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="group flex flex-col md:flex-row md:items-center justify-between p-8 bg-white rounded-[2rem] border border-slate-100 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-50 transition-all"
+                className="group flex flex-col md:flex-row md:items-center justify-between p-10 bg-white rounded-[2.5rem] border border-slate-100 hover:border-blue-400 hover:shadow-xl hover:shadow-blue-50 transition-all"
               >
-                <div className="space-y-2">
+                <div className="space-y-4">
                   <div className="flex items-center gap-3">
-                    <span className="px-3 py-1 bg-blue-50 text-blue-700 text-[10px] font-black uppercase tracking-widest rounded-full">{pub.info}</span>
+                    <span className="px-4 py-1.5 bg-blue-50 text-blue-700 text-[10px] font-black uppercase tracking-widest rounded-full border border-blue-100">{pub.info}</span>
                   </div>
-                  <h3 className="text-xl font-bold text-slate-800 group-hover:text-blue-600 transition-colors leading-tight max-w-3xl">{pub.title}</h3>
+                  <h3 className="text-2xl font-bold text-slate-800 group-hover:text-blue-600 transition-colors leading-tight max-w-3xl">{pub.title}</h3>
                 </div>
-                <div className="mt-6 md:mt-0 flex items-center gap-2 text-blue-600 font-bold text-sm">
-                  Full Article <ExternalLink size={18} />
+                <div className="mt-8 md:mt-0 flex items-center gap-2 text-blue-600 font-bold group-hover:translate-x-2 transition-transform">
+                  Read Full Paper <ArrowRight size={20} />
                 </div>
               </a>
             ))}
           </div>
           
-          <div className="mt-12 flex justify-center">
-             <a href={profileData.contact.scholar} target="_blank" className="px-10 py-4 bg-white border-2 border-slate-900 text-slate-900 rounded-2xl font-bold hover:bg-slate-900 hover:text-white transition-all shadow-lg flex items-center gap-3">
-               More on Google Scholar <ArrowRight size={20} />
+          <div className="mt-16 flex flex-col md:flex-row items-center justify-center gap-8 p-12 bg-white rounded-[3rem] border border-slate-100 shadow-sm">
+             <div className="text-center md:text-left">
+                <h4 className="text-2xl font-bold text-slate-900">Explore More Research</h4>
+                <p className="text-slate-500 mt-2">Access my full profile on Google Scholar for citations and analytics.</p>
+             </div>
+             <a href={profileData.contact.scholar} target="_blank" className="px-12 py-5 bg-slate-900 text-white rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-xl flex items-center gap-3 whitespace-nowrap">
+               Google Scholar <ExternalLink size={20} />
              </a>
           </div>
         </div>
@@ -320,17 +324,17 @@ const App = () => {
       {/* Leadership Section */}
       <section id="leadership" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <SectionHeader title="Leadership & Organizations" subtitle="Actively contributing to various academic and social communities." />
+          <SectionHeader title="Leadership & Organizations" subtitle="Actively participating in social and professional development." />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {profileData.organizations.map((item, i) => (
-              <div key={i} className="p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:border-blue-400 transition-all shadow-sm flex items-start gap-5">
-                <div className="p-3 bg-white rounded-2xl text-blue-600 shadow-sm shrink-0">
+              <div key={i} className="p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:border-blue-400 hover:bg-white hover:shadow-xl transition-all flex items-start gap-5">
+                <div className="p-4 bg-white rounded-2xl text-blue-600 shadow-sm shrink-0 border border-slate-100">
                   <Users size={24} />
                 </div>
                 <div>
                   <h4 className="font-bold text-slate-900 text-lg leading-tight">{item.role}</h4>
                   <p className="text-slate-500 text-sm mt-1">{item.org}</p>
-                  <span className="inline-block mt-3 px-3 py-1 bg-white border border-slate-200 text-slate-400 text-[10px] font-bold rounded-full uppercase tracking-tighter">
+                  <span className="inline-block mt-4 px-3 py-1 bg-white border border-slate-200 text-slate-400 text-[10px] font-bold rounded-full uppercase tracking-widest">
                     {item.period}
                   </span>
                 </div>
@@ -340,40 +344,42 @@ const App = () => {
         </div>
       </section>
 
-      {/* Experience & Grants Section */}
+      {/* Experience & Grants */}
       <section id="experience" className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16">
+          <div className="grid lg:grid-cols-2 gap-20">
             <div>
-              <SectionHeader title="Work Experience" />
+              <SectionHeader title="Professional Experience" />
               <div className="space-y-12">
                 {profileData.experience.map((exp, i) => (
-                  <div key={i} className="relative pl-8 before:absolute before:left-0 before:top-2 before:w-1 before:h-full before:bg-slate-200 last:before:hidden">
-                    <div className="absolute left-[-4px] top-2 w-3 h-3 bg-blue-600 rounded-full"></div>
-                    <span className="text-xs font-black text-blue-600 uppercase tracking-widest">{exp.period}</span>
-                    <h4 className="text-xl font-bold text-slate-900 mt-2">{exp.role}</h4>
+                  <div key={i} className="relative pl-10 before:absolute before:left-0 before:top-2 before:w-[2px] before:h-full before:bg-slate-200 last:before:hidden">
+                    <div className="absolute left-[-5px] top-2 w-3 h-3 bg-blue-600 rounded-full border-4 border-slate-50"></div>
+                    <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest">{exp.period}</span>
+                    <h4 className="text-xl font-bold text-slate-900 mt-2 tracking-tight">{exp.role}</h4>
                     <p className="text-slate-500 font-bold mb-3">{exp.org}</p>
                     <p className="text-slate-600 leading-relaxed text-sm">{exp.desc}</p>
                   </div>
                 ))}
               </div>
             </div>
-            <div>
-              <SectionHeader title="Public Grants" />
-              <div className="space-y-4">
-                {profileData.grants.map((grant, i) => (
-                  <div key={i} className="p-6 bg-white rounded-2xl border border-slate-100 flex items-center gap-5 shadow-sm">
-                    <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center shadow-sm shrink-0">
-                      <Award size={24} />
+            <div className="space-y-12">
+              <div>
+                <SectionHeader title="Research Grants" />
+                <div className="space-y-4">
+                  {profileData.grants.map((grant, i) => (
+                    <div key={i} className="p-6 bg-white rounded-2xl border border-slate-100 flex items-center gap-6 shadow-sm hover:border-blue-400 transition-all group">
+                      <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center shadow-sm shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                        <Award size={24} />
+                      </div>
+                      <p className="font-bold text-slate-700 text-sm leading-relaxed">{grant}</p>
                     </div>
-                    <p className="font-bold text-slate-700 text-sm leading-relaxed">{grant}</p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
               
-              <div className="mt-12 p-8 bg-blue-50 rounded-[2rem] border border-blue-100">
-                <h4 className="font-bold text-blue-800 mb-2 flex items-center gap-2"><Globe size={18}/> Social Engagement</h4>
-                <p className="text-blue-700 text-sm leading-relaxed opacity-80 italic">"Dedicated to community service as a Mubaligh Hijrah and providing career counseling for vocational students."</p>
+              <div className="p-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-[3rem] text-white shadow-xl shadow-blue-200">
+                <h4 className="font-bold text-xl mb-4 flex items-center gap-3"><Globe size={24}/> Social Engagement</h4>
+                <p className="text-blue-50 leading-relaxed font-medium">"Dedicated to community service as a Mubaligh Hijrah in Tanah Karo and career mentoring for vocational students."</p>
               </div>
             </div>
           </div>
@@ -381,26 +387,26 @@ const App = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 bg-slate-900 text-white rounded-t-[4rem] lg:rounded-t-[6rem]">
+      <section id="contact" className="py-24 bg-slate-900 text-white rounded-t-[5rem]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-24 items-center">
             <div className="space-y-10">
-              <h2 className="text-5xl font-extrabold tracking-tight text-white">Let's build something <br/><span className="text-blue-500 underline decoration-4 underline-offset-8">Extraordinary</span>.</h2>
+              <h2 className="text-5xl lg:text-7xl font-extrabold tracking-tighter text-white leading-none">Let's <span className="text-blue-500">Connect</span>.</h2>
               <div className="space-y-8">
                 {[
-                  { icon: Mail, label: 'Email', value: profileData.contact.email },
-                  { icon: Phone, label: 'WhatsApp', value: profileData.contact.phone },
-                  { icon: MapPin, label: 'Office', value: profileData.contact.address }
+                  { icon: Mail, label: 'Professional Email', value: profileData.contact.email },
+                  { icon: Phone, label: 'WhatsApp Messenger', value: profileData.contact.phone },
+                  { icon: MapPin, label: 'Location Base', value: profileData.contact.address }
                 ].map((item, i) => {
                   const ContactIcon = item.icon;
                   return (
-                    <div key={i} className="flex items-center gap-6 group">
-                      <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center text-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-all">
-                        <ContactIcon size={24} />
+                    <div key={i} className="flex items-center gap-8 group">
+                      <div className="w-16 h-16 bg-white/5 rounded-3xl flex items-center justify-center text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-all border border-white/10">
+                        <ContactIcon size={30} />
                       </div>
                       <div>
-                        <p className="text-[10px] text-slate-500 uppercase font-black tracking-widest">{item.label}</p>
-                        <p className="text-lg font-bold text-slate-200">{item.value}</p>
+                        <p className="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-1">{item.label}</p>
+                        <p className="text-xl font-bold text-slate-200 tracking-tight">{item.value}</p>
                       </div>
                     </div>
                   );
@@ -408,12 +414,15 @@ const App = () => {
               </div>
             </div>
             
-            <div className="bg-white/5 p-10 rounded-[3rem] border border-white/10 backdrop-blur-xl text-left">
+            <div className="bg-white/5 p-12 rounded-[4rem] border border-white/10 backdrop-blur-2xl">
               <form className="space-y-6" onSubmit={e => e.preventDefault()}>
-                <input type="text" placeholder="Full Name" className="w-full px-8 py-5 rounded-2xl bg-white/5 border border-white/10 focus:border-blue-500 outline-none transition-all font-medium text-white" />
-                <input type="email" placeholder="Email Address" className="w-full px-8 py-5 rounded-2xl bg-white/5 border border-white/10 focus:border-blue-500 outline-none transition-all font-medium text-white" />
-                <textarea rows="4" placeholder="How can I help you?" className="w-full px-8 py-5 rounded-2xl bg-white/5 border border-white/10 focus:border-blue-500 outline-none transition-all font-medium resize-none text-white"></textarea>
-                <button className="w-full py-5 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-black transition-all shadow-xl shadow-blue-600/20">SEND MESSAGE</button>
+                <div className="grid md:grid-cols-2 gap-6">
+                   <input type="text" placeholder="First Name" className="w-full px-8 py-5 rounded-3xl bg-white/5 border border-white/10 focus:border-blue-500 outline-none transition-all font-medium text-white" />
+                   <input type="text" placeholder="Last Name" className="w-full px-8 py-5 rounded-3xl bg-white/5 border border-white/10 focus:border-blue-500 outline-none transition-all font-medium text-white" />
+                </div>
+                <input type="email" placeholder="Professional Email" className="w-full px-8 py-5 rounded-3xl bg-white/5 border border-white/10 focus:border-blue-500 outline-none transition-all font-medium text-white" />
+                <textarea rows="4" placeholder="How can we collaborate?" className="w-full px-8 py-5 rounded-3xl bg-white/5 border border-white/10 focus:border-blue-500 outline-none transition-all font-medium resize-none text-white"></textarea>
+                <button className="w-full py-6 bg-blue-600 hover:bg-blue-700 text-white rounded-3xl font-black text-lg transition-all shadow-2xl shadow-blue-600/30">SEND INQUIRY</button>
               </form>
             </div>
           </div>
@@ -421,10 +430,10 @@ const App = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 bg-slate-900 text-slate-500 border-t border-white/5 text-center">
+      <footer className="py-16 bg-slate-900 text-slate-500 border-t border-white/5 text-center">
         <div className="max-w-7xl mx-auto px-6">
-          <p className="text-[10px] font-black uppercase tracking-[0.3em]">
-            © 2026 Egi Dio Bagus Sudewo, M.Kom. • Built with Integrity and AI.
+          <p className="text-[10px] font-black uppercase tracking-[0.4em]">
+            © 2026 Egi Dio Bagus Sudewo, M.Kom. • Academic Portfolio • AI-Driven Innovation
           </p>
         </div>
       </footer>
